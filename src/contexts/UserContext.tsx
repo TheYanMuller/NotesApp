@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserDTO } from "../types/User";
 import { showError } from "../components/Toast";
@@ -109,7 +109,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     await AsyncStorage.removeItem("@cart");
   };
 
-  return 
+  return (
     <UserContext.Provider
       value={{
         token,
@@ -124,5 +124,5 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     >
       {children}
     </UserContext.Provider>
-  
+    );
 };
