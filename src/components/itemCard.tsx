@@ -1,9 +1,9 @@
-import { StyleShet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Swipeable } from "react-native-gesture-handler";
 import { Task } from "../types/Tasks";
-import { categories } from "../utils/data/todos";
+import { categories } from "../utils/data";
 
 interface Props {
     task: Task;
@@ -17,7 +17,7 @@ const itemCard = ({task, handleRemoveTask, handleDoneTask }: Props)=>{
     const handleDelete = () => {
         Alert.alert("Tarefas", "Tem certeja que deseja excluir essa tarefa?", [
             {
-                text: "Nop"
+                text: "Nop",
                 style: "cancel"
             },
             {text: "Yup", onPress: () => handleRemoveTask(task.id)},
@@ -26,7 +26,7 @@ const itemCard = ({task, handleRemoveTask, handleDoneTask }: Props)=>{
 
     const leftAction = () => {
         return(
-            <View>
+            <View style ={styles.swipeLeft}>
                 <MaterialIcons
                     name="done"
                     size={20}
@@ -39,7 +39,7 @@ const itemCard = ({task, handleRemoveTask, handleDoneTask }: Props)=>{
 
     const rightAction = () => {
         return(
-            <View style={ }>
+            <View style={styles.swipeRight}>
                 <MaterialIcons
                     name="delete"
                     size={20}
@@ -52,13 +52,31 @@ const itemCard = ({task, handleRemoveTask, handleDoneTask }: Props)=>{
 
     return(
         <Swipeable renderLeftActions={leftAction} renderRightActions={rightAction}>
-            <View>
+            <View style={styles.container}>
                 <View
                     style={{
-                        
+                        borderStyle: "solid",
+                        height: "100%",
+                        borderLeftWidth: 6,
+                        borderColor: category[0].color,
+                        marginRight: 10,
                     }}
                 />
             </View>
         </Swipeable>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    swipeLeft:{
+        
+    },
+    swipeRight:{
+
+    },
+    container:{
+
+    }
+})
+
+export default itemCard;
